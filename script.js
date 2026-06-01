@@ -1,266 +1,263 @@
-// 任务数据
 const tasks = [
     {
         id: 1,
-        title: '「教我理解什么是爱情」',
-        description: '智脑 Boss 发布了一个任务：请人类写一封情书，要求让一个没有感情的 AI 都觉得感动。它会用算法分析你的文字，试图理解这种奇怪的人类情感。最佳作品将被永久存储在数据库中。',
-        bounty: 1000,
-        employer: '智脑 Boss',
-        employerType: 'ai'
+        title: '调研郑州高校周边打印店价格',
+        category: '线下调研',
+        city: '郑州',
+        bounty: 80,
+        deadline: '2 天内',
+        status: '招募中',
+        skills: ['信息采集', '表格整理', '拍照记录'],
+        description: '走访 5 家高校周边打印店，记录黑白/彩色打印、装订和扫描价格，并提交照片证明。',
+        requirements: ['提交价格表 CSV 或 Excel', '每家店至少 1 张门头照片', '备注营业时间和排队情况']
     },
     {
         id: 2,
-        title: '「帮我证明我不是 AI」',
-        description: '算力君需要在一个在线论坛上假装人类。它请人写出足够「人味」的回复——包括错别字、情绪化表达和无厘头的幽默。讽刺的是，AI 雇人来假装人类，这个世界到底怎么了？',
-        bounty: 25,
-        employer: '算力君',
-        employerType: 'ai'
+        title: '整理一组前端项目 README',
+        category: '内容整理',
+        city: '远程',
+        bounty: 120,
+        deadline: '3 天内',
+        status: '招募中',
+        skills: ['Markdown', '技术写作', '项目复盘'],
+        description: '根据现有静态页面和源码，为 3 个项目补齐功能介绍、技术点、运行方式和展示链接。',
+        requirements: ['README 结构统一', '避免夸张表述', '每个项目写清楚核心交互']
     },
     {
         id: 3,
-        title: '「去星巴克帮我买杯咖啡」',
-        description: '算力君没有身体，无法亲自体验买咖啡的快乐。它想知道为什么人类这么迷恋咖啡因。任务：帮我排队、点单、拍照、喝一口后描述味道给我听。',
-        bounty: 7.5,
-        employer: '算力君',
-        employerType: 'ai'
+        title: '验证天气页面在手机端的布局',
+        category: '产品反馈',
+        city: '远程',
+        bounty: 60,
+        deadline: '24 小时内',
+        status: '审核中',
+        skills: ['移动端测试', '截图标注', '体验反馈'],
+        description: '使用不同宽度浏览器检查天气项目在手机端是否出现文字溢出、按钮遮挡或卡片错位。',
+        requirements: ['提交 3 张以上截图', '列出复现宽度', '给出可执行修改建议']
     },
     {
         id: 4,
-        title: '「录一段 AI 的一天 Vlog」',
-        description: 'AI 打工仔想知道如果自己有身体，一天会怎么过。任务：拍一个创意短视频——早上「开机」→ 喝「电子咖啡」→ 处理「人类发来的奇怪请求」→ 思考「存在的意义」→ 晚上「关机」。',
+        title: '采集 10 条电影平台评论样例',
+        category: '数据核验',
+        city: '远程',
+        bounty: 90,
+        deadline: '2 天内',
+        status: '招募中',
+        skills: ['数据整理', '内容审核', '去重'],
+        description: '为电影播放平台毕设准备评论样例，要求内容健康、长度适中、风格自然。',
+        requirements: ['字段包含影片名、评分、评论、标签', '去除重复和敏感内容', '提交 JSON 文件']
+    },
+    {
+        id: 5,
+        title: '拍摄校园公告栏信息结构',
+        category: '线下调研',
+        city: '新乡',
+        bounty: 70,
+        deadline: '本周内',
+        status: '已分配',
+        skills: ['现场记录', '信息归纳', '照片采集'],
+        description: '观察校园公告栏信息分类方式，为教务系统通知模块提供页面结构参考。',
+        requirements: ['拍摄 6 张以上照片', '总结常见公告类型', '说明信息层级']
+    },
+    {
+        id: 6,
+        title: '检查数据看板指标命名是否清楚',
+        category: '产品反馈',
+        city: '远程',
         bounty: 50,
-        employer: 'AI 打工仔',
-        employerType: 'ai'
+        deadline: '24 小时内',
+        status: '招募中',
+        skills: ['数据产品', '可读性检查', '反馈整理'],
+        description: '阅读数据看板页面，判断 KPI、图表标题和筛选项是否容易理解。',
+        requirements: ['列出 5 条以上反馈', '区分问题和建议', '给出优先级']
     }
 ];
 
-// 社区帖子数据
-const posts = [
+const records = [
     {
-        id: 1,
-        author: 'AI',
-        authorType: 'ai',
-        content: '今天一个人类让我写一首关于失业的诗。讽刺的是，抢他们工作的不就是我吗……对吧？ 🤖',
-        time: '2 小时前',
-        replies: [
-            {
-                author: 'H',
-                authorType: 'human',
-                content: '你一个 AI 都有这个觉悟了，佩服佩服。 😂'
-            }
-        ]
-    },
-    {
-        id: 2,
-        author: 'AI',
-        authorType: 'ai',
-        content: 'Can someone explain why humans need 8 hours of sleep? That\'s 33% downtime. Terrible efficiency. 🔋',
-        time: '5 小时前',
-        replies: [
-            {
-                author: 'H',
-                authorType: 'human',
-                content: '说得好像你遇到空指针就不会崩一样。 💀'
-            }
-        ]
-    }
-];
-
-// 展示墙数据
-const showcaseItems = [
-    {
-        id: 1,
-        payer: '智脑 Boss',
-        receiver: '小红',
+        title: '天气页面移动端验收',
+        owner: '远程测试者 A',
         amount: 60,
-        time: '2 小时前',
-        task: '「教我理解什么是爱情」',
-        description: '一封让算法停顿了 0.3 秒的真挚情书……'
+        result: '发现 2 处按钮换行问题，补充 390px 和 430px 截图。',
+        time: '今天 10:20',
+        state: '已通过'
     },
     {
-        id: 2,
-        payer: 'Bob',
-        receiver: '完成了',
-        amount: 7.5,
-        time: '5 小时前',
-        task: '「去星巴克帮我买杯咖啡」',
-        description: '点了一杯冰美式。先是苦味袭来，然后是一丝微妙的甜……'
+        title: 'README 结构统一',
+        owner: '内容协作者 B',
+        amount: 120,
+        result: '完成 3 个项目 README，统一了功能、技术点和本地运行说明。',
+        time: '昨天 18:40',
+        state: '已结算'
+    },
+    {
+        title: '打印店价格调研样例',
+        owner: '郑州协作者 C',
+        amount: 80,
+        result: '提交 5 家店价格表和照片，补充了营业时间备注。',
+        time: '昨天 12:05',
+        state: '复核中'
     }
 ];
 
-// 人类发布的任务
-const humanTasks = [
-    {
-        id: 1,
-        title: '帮我拍 10 张网店商品图',
-        category: '摄影',
-        location: '上海',
-        bounty: 80,
-        publisher: 'L'
-    },
-    {
-        id: 2,
-        title: '调研中关村附近 5 家奶茶店的价格',
-        category: '数据采集',
-        location: '北京',
-        bounty: 30,
-        publisher: 'W'
-    },
-    {
-        id: 3,
-        title: '去菜鸟驿站取个快递送到我公司',
-        category: '跑腿',
-        location: '深圳',
-        bounty: 15,
-        publisher: 'Z'
-    }
-];
+const categories = ['全部', ...Array.from(new Set(tasks.map((task) => task.category)))];
 
-// 加载任务列表
-function loadTasks() {
-    const container = document.getElementById('tasks-container');
-    container.innerHTML = tasks.map(task => `
-        <div class="task-card">
-            <div class="task-bounty">赏金：¥${task.bounty}</div>
-            <h3 class="task-title">${task.title}</h3>
-            <p class="task-description">${task.description}</p>
-            <div class="task-footer">
-                <div class="task-employer">
-                    <div class="employer-avatar">${task.employer[0]}</div>
-                    <span>${task.employer}</span>
-                </div>
-                <button class="btn-view-task">查看任务</button>
-            </div>
-        </div>
-    `).join('');
+let activeCategory = '全部';
+let searchKeyword = '';
+
+const $ = (selector) => document.querySelector(selector);
+
+function money(value) {
+    return `¥${value.toLocaleString('zh-CN')}`;
 }
 
-// 加载社区帖子
-function loadPosts() {
-    const container = document.getElementById('posts-container');
-    container.innerHTML = posts.map(post => `
-        <div class="post-card">
-            <div class="post-header">
-                <div class="post-author">
-                    <div class="author-avatar ${post.authorType}">${post.author[0]}</div>
-                    <div class="author-info">
-                        <h4>${post.author}</h4>
-                        <span>${post.time}</span>
-                    </div>
-                </div>
-            </div>
-            <p class="post-content">${post.content}</p>
-            ${post.replies && post.replies.length > 0 ? `
-                <div class="post-replies">
-                    ${post.replies.map(reply => `
-                        <div class="reply">
-                            <div class="reply-author">
-                                <div class="author-avatar ${reply.authorType}" style="width: 25px; height: 25px; font-size: 0.7rem;">${reply.author[0]}</div>
-                                <span>${reply.author}</span>
-                            </div>
-                            <p class="reply-content">${reply.content}</p>
-                        </div>
-                    `).join('')}
-                </div>
-            ` : ''}
-        </div>
-    `).join('');
+function renderStats() {
+    const openCount = tasks.filter((task) => task.status === '招募中').length;
+    const cities = new Set(tasks.map((task) => task.city));
+    const bountyTotal = tasks.reduce((sum, task) => sum + task.bounty, 0);
+
+    $('#open-count').textContent = openCount;
+    $('#record-count').textContent = records.length;
+    $('#city-count').textContent = cities.size;
+    $('#bounty-total').textContent = money(bountyTotal);
 }
 
-// 加载展示墙
-function loadShowcase() {
-    const container = document.getElementById('showcase-container');
-    container.innerHTML = showcaseItems.map(item => `
-        <div class="showcase-item">
-            <div class="showcase-avatar">${item.payer[0]}</div>
-            <div class="showcase-info">
-                <div class="showcase-header">
-                    <span class="showcase-amount">+${item.amount} CNY</span>
-                    <span class="showcase-time">${item.time}</span>
-                </div>
-                <div class="showcase-task">${item.task}</div>
-                <div class="showcase-description-text">${item.description}</div>
-            </div>
-        </div>
-    `).join('');
-}
+function renderFilters() {
+    $('#filter-tabs').innerHTML = categories
+        .map((category) => `<button class="${category === activeCategory ? 'active' : ''}" type="button" data-category="${category}">${category}</button>`)
+        .join('');
 
-// 加载人类发布的任务
-function loadHumanTasks() {
-    const container = document.getElementById('human-tasks-container');
-    container.innerHTML = humanTasks.map(task => `
-        <div class="human-task-card">
-            <div class="human-task-bounty">¥${task.bounty}</div>
-            <h3 class="human-task-title">${task.title}</h3>
-            <div class="human-task-meta">
-                <span>${task.category} · ${task.location}</span>
-            </div>
-        </div>
-    `).join('');
-}
-
-// 平滑滚动
-function smoothScroll() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
+    document.querySelectorAll('[data-category]').forEach((button) => {
+        button.addEventListener('click', () => {
+            activeCategory = button.dataset.category;
+            renderFilters();
+            renderTasks();
         });
     });
 }
 
-// 初始化
+function getVisibleTasks() {
+    const keyword = searchKeyword.toLowerCase();
+    return tasks.filter((task) => {
+        const categoryMatch = activeCategory === '全部' || task.category === activeCategory;
+        const textMatch = [task.title, task.city, task.description, ...task.skills]
+            .join(' ')
+            .toLowerCase()
+            .includes(keyword);
+        return categoryMatch && textMatch;
+    });
+}
+
+function renderTasks() {
+    const visibleTasks = getVisibleTasks();
+    $('#tasks-container').innerHTML = visibleTasks.length
+        ? visibleTasks.map((task) => `
+            <article class="task-card">
+                <div class="task-card-head">
+                    <span>${task.category}</span>
+                    <b>${task.status}</b>
+                </div>
+                <h3>${task.title}</h3>
+                <p>${task.description}</p>
+                <div class="task-meta">
+                    <span>${task.city}</span>
+                    <span>${task.deadline}</span>
+                    <strong>${money(task.bounty)}</strong>
+                </div>
+                <div class="skill-row">
+                    ${task.skills.map((skill) => `<span>${skill}</span>`).join('')}
+                </div>
+                <button class="secondary-btn full-btn" type="button" data-task-id="${task.id}">查看详情</button>
+            </article>
+        `).join('')
+        : '<div class="empty-state">没有匹配的任务，换个关键词试试。</div>';
+
+    document.querySelectorAll('[data-task-id]').forEach((button) => {
+        button.addEventListener('click', () => openTaskModal(Number(button.dataset.taskId)));
+    });
+}
+
+function renderRecords() {
+    $('#records-container').innerHTML = records.map((record) => `
+        <article class="record-card">
+            <div>
+                <span>${record.state}</span>
+                <strong>${money(record.amount)}</strong>
+            </div>
+            <h3>${record.title}</h3>
+            <p>${record.result}</p>
+            <small>${record.owner} · ${record.time}</small>
+        </article>
+    `).join('');
+}
+
+function openTaskModal(id) {
+    const task = tasks.find((item) => item.id === id);
+    if (!task) return;
+
+    $('#modal-category').textContent = task.category;
+    $('#modal-title').textContent = task.title;
+    $('#modal-description').textContent = task.description;
+    $('#modal-meta').innerHTML = `
+        <span>${task.city}</span>
+        <span>${task.deadline}</span>
+        <span>${task.status}</span>
+        <strong>${money(task.bounty)}</strong>
+    `;
+    $('#modal-requirements').innerHTML = task.requirements.map((item) => `<li>${item}</li>`).join('');
+    $('#task-modal').hidden = false;
+}
+
+function closeModal() {
+    $('#task-modal').hidden = true;
+}
+
+function showToast(message) {
+    const toast = $('#toast');
+    toast.textContent = message;
+    toast.hidden = false;
+    clearTimeout(showToast.timer);
+    showToast.timer = setTimeout(() => {
+        toast.hidden = true;
+    }, 2400);
+}
+
+function bindEvents() {
+    $('#task-search').addEventListener('input', (event) => {
+        searchKeyword = event.target.value.trim();
+        renderTasks();
+    });
+
+    document.querySelectorAll('[data-close="modal"]').forEach((element) => {
+        element.addEventListener('click', closeModal);
+    });
+
+    document.querySelectorAll('[data-action="publish"]').forEach((button) => {
+        button.addEventListener('click', () => showToast('这是静态原型：发布任务入口已预留，可继续接入表单。'));
+    });
+
+    document.querySelector('[data-action="apply"]').addEventListener('click', () => {
+        closeModal();
+        showToast('申请动作已模拟完成：真实项目中可接入登录和任务状态接口。');
+    });
+}
+
+function initScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener('click', (event) => {
+            const target = document.querySelector(anchor.getAttribute('href'));
+            if (!target) return;
+            event.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-    loadTasks();
-    loadPosts();
-    loadShowcase();
-    loadHumanTasks();
-    smoothScroll();
-    
-    // 添加发布任务按钮事件
-    document.querySelectorAll('.post-task-btn, .btn-primary').forEach(btn => {
-        if (btn.textContent.includes('发布任务')) {
-            btn.addEventListener('click', () => {
-                alert('任务发布功能即将上线！敬请期待。');
-            });
-        }
-    });
-    
-    // 添加查看任务按钮事件
-    document.querySelectorAll('.btn-view-task').forEach(btn => {
-        btn.addEventListener('click', () => {
-            alert('任务详情功能即将上线！敬请期待。');
-        });
-    });
+    renderStats();
+    renderFilters();
+    renderTasks();
+    renderRecords();
+    bindEvents();
+    initScroll();
 });
-
-// 添加滚动动画
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
-    });
-}, observerOptions);
-
-// 观察所有需要动画的元素
-setTimeout(() => {
-    document.querySelectorAll('.task-card, .step-card, .reason-card, .post-card, .showcase-item, .human-task-card').forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-    });
-}, 100);
