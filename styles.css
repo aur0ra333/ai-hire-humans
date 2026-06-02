@@ -200,7 +200,7 @@ h1 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 16px;
-    margin-bottom: 72px;
+    margin-bottom: 18px;
 }
 
 .stats-band article {
@@ -217,6 +217,32 @@ h1 {
     display: block;
     margin: 8px 0 4px;
     font-size: 2.3rem;
+}
+
+.capability-strip {
+    width: min(1180px, calc(100% - 32px));
+    margin: 0 auto 58px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+}
+
+.capability-strip > div {
+    min-height: 92px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: #fff;
+    padding: 18px;
+    box-shadow: 0 14px 32px rgba(24, 70, 78, 0.06);
+}
+
+.capability-strip strong {
+    display: block;
+    margin-bottom: 6px;
+}
+
+.capability-strip span {
+    color: var(--muted);
 }
 
 .section {
@@ -562,6 +588,7 @@ input:focus {
     }
 
     .stats-band,
+    .capability-strip,
     .tasks-grid,
     .workflow-grid,
     .records-grid {
@@ -582,7 +609,8 @@ input:focus {
     .nav-container,
     .hero,
     .section,
-    .stats-band {
+    .stats-band,
+    .capability-strip {
         width: min(100% - 20px, 1180px);
     }
 
