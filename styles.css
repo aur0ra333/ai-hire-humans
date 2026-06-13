@@ -1,14 +1,18 @@
 :root {
-    --bg: #eef4f2;
+    --page: #f6f8fb;
     --surface: #ffffff;
-    --surface-soft: #e2ece8;
-    --ink: #18212f;
-    --muted: #687386;
-    --line: #d4e1dc;
-    --green: #177a5e;
+    --surface-soft: #eef3f8;
+    --ink: #17202a;
+    --muted: #667085;
+    --line: #d9e2ec;
     --blue: #2563eb;
+    --blue-soft: #e9f0ff;
+    --green: #0f9f6e;
     --orange: #b85c38;
-    --shadow: 0 18px 54px rgba(24, 70, 78, 0.12);
+    --shadow-sm: 0 10px 28px rgba(23, 32, 42, 0.06);
+    --shadow-md: 0 22px 55px rgba(23, 32, 42, 0.1);
+    --radius: 18px;
+    --transition: 180ms ease;
 }
 
 * {
@@ -22,10 +26,10 @@ html {
 body {
     margin: 0;
     background:
-        linear-gradient(135deg, rgba(37, 99, 235, 0.09), transparent 34%),
-        linear-gradient(180deg, #f8fcff 0%, var(--bg) 72%);
+        linear-gradient(135deg, rgba(37, 99, 235, 0.06), transparent 34%),
+        linear-gradient(180deg, #ffffff 0%, var(--page) 72%);
     color: var(--ink);
-    font-family: Inter, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    font-family: "Source Sans 3", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
     line-height: 1.6;
 }
 
@@ -41,6 +45,14 @@ button {
 a {
     color: inherit;
     text-decoration: none;
+}
+
+h1, h2, h3 {
+    font-family: Chivo, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+}
+
+.logo {
+    font-family: Chivo, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
 }
 
 .site-header {
@@ -88,6 +100,7 @@ a {
     padding: 0 18px;
     font-weight: 800;
     border: 1px solid transparent;
+    transition: transform var(--transition);
 }
 
 .primary-btn {
@@ -128,6 +141,7 @@ a {
     font-weight: 900;
     letter-spacing: 0.04em;
     text-transform: uppercase;
+    font-family: Chivo, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
 }
 
 h1,
@@ -157,6 +171,7 @@ h1 {
     margin-top: 30px;
 }
 
+/* Cards — 白色背景 + 1px solid var(--line) + var(--shadow-sm) + border-radius 18px */
 .hero-panel,
 .stats-band article,
 .task-card,
@@ -164,9 +179,9 @@ h1 {
 .record-card,
 .quality-section,
 .modal-card {
-    background: rgba(255, 255, 255, 0.9);
+    background: var(--surface);
     border: 1px solid var(--line);
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow-sm);
 }
 
 .hero-panel {
@@ -204,7 +219,7 @@ h1 {
 }
 
 .stats-band article {
-    border-radius: 18px;
+    border-radius: var(--radius);
     padding: 22px;
 }
 
@@ -230,10 +245,10 @@ h1 {
 .capability-strip > div {
     min-height: 92px;
     border: 1px solid var(--line);
-    border-radius: 18px;
-    background: #fff;
+    border-radius: var(--radius);
+    background: var(--surface);
     padding: 18px;
-    box-shadow: 0 14px 32px rgba(24, 70, 78, 0.06);
+    box-shadow: var(--shadow-sm);
 }
 
 .capability-strip strong {
@@ -324,7 +339,7 @@ input:focus {
 }
 
 .task-card {
-    border-radius: 18px;
+    border-radius: var(--radius);
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -351,7 +366,7 @@ input:focus {
 .modal-meta span {
     border-radius: 999px;
     padding: 5px 10px;
-    background: #eef6f3;
+    background: var(--surface-soft);
     color: var(--muted);
     font-size: 0.82rem;
 }
@@ -385,9 +400,10 @@ input:focus {
 .skill-row span {
     padding: 5px 9px;
     border-radius: 8px;
-    background: rgba(37, 99, 235, 0.08);
+    background: var(--blue-soft);
     color: var(--blue);
     font-size: 0.82rem;
+    border: 1px solid rgba(37, 99, 235, 0.1);
 }
 
 .full-btn {
@@ -401,7 +417,7 @@ input:focus {
 }
 
 .workflow-grid article {
-    border-radius: 18px;
+    border-radius: var(--radius);
     padding: 22px;
 }
 
@@ -429,7 +445,7 @@ input:focus {
 }
 
 .record-card {
-    border-radius: 18px;
+    border-radius: var(--radius);
     padding: 20px;
 }
 
@@ -480,7 +496,7 @@ input:focus {
     padding: 16px;
     border: 1px solid var(--line);
     border-radius: 14px;
-    background: #fff;
+    background: var(--surface);
 }
 
 .quality-list strong {
@@ -509,15 +525,16 @@ input:focus {
 .modal-backdrop {
     position: absolute;
     inset: 0;
-    background: rgba(24, 33, 47, 0.42);
+    background: rgba(23, 32, 42, 0.42);
 }
 
 .modal-card {
     position: relative;
     width: min(680px, 100%);
-    border-radius: 22px;
+    border-radius: var(--radius);
     padding: 28px;
     z-index: 1;
+    box-shadow: var(--shadow-md);
 }
 
 .modal-card h2 {
@@ -548,7 +565,7 @@ input:focus {
     height: 36px;
     border-radius: 50%;
     border: 1px solid var(--line);
-    background: #fff;
+    background: var(--surface);
     font-size: 1.2rem;
 }
 
@@ -562,7 +579,7 @@ input:focus {
     border-radius: 12px;
     background: var(--ink);
     color: #fff;
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow-md);
 }
 
 .empty-state {
@@ -571,7 +588,7 @@ input:focus {
     text-align: center;
     color: var(--muted);
     border: 1px dashed var(--line);
-    border-radius: 18px;
+    border-radius: var(--radius);
 }
 
 .footer {
@@ -627,18 +644,19 @@ input:focus {
 
     .quality-section {
         padding: 20px;
-        border-radius: 18px;
+        border-radius: var(--radius);
     }
 }
 
-/* Visual refinement */
+/* ---- Visual refinement ---- */
+
 body {
     background:
-        linear-gradient(180deg, #ffffff 0%, #f4f7fb 42%, #eef4f2 100%);
+        linear-gradient(180deg, #ffffff 0%, #f4f7fb 42%, var(--page) 100%);
 }
 
 .site-header {
-    box-shadow: 0 8px 26px rgba(24, 33, 47, 0.04);
+    box-shadow: var(--shadow-sm);
 }
 
 .logo {
@@ -666,8 +684,8 @@ body {
 .record-card,
 .quality-section,
 .modal-card {
-    background: rgba(255, 255, 255, 0.96);
-    box-shadow: 0 18px 46px rgba(24, 70, 78, 0.08);
+    background: var(--surface);
+    box-shadow: var(--shadow-sm);
 }
 
 .hero {
@@ -687,7 +705,7 @@ body {
 .workflow-grid article,
 .record-card,
 .quality-list div {
-    transition: transform 170ms ease, box-shadow 170ms ease, border-color 170ms ease;
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
 }
 
 .stats-band article:hover,
@@ -696,16 +714,5 @@ body {
 .record-card:hover {
     transform: translateY(-3px);
     border-color: rgba(37, 99, 235, 0.24);
-    box-shadow: 0 18px 34px rgba(24, 70, 78, 0.11);
-}
-
-.task-card-head span,
-.task-card-head b,
-.task-meta span,
-.modal-meta span {
-    background: #f1f6f4;
-}
-
-.skill-row span {
-    border: 1px solid rgba(37, 99, 235, 0.1);
+    box-shadow: var(--shadow-md);
 }
