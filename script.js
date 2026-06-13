@@ -1,5 +1,5 @@
 /* ================================================================
-   Task Collaboration Lab - script.js
+   任务协作平台 - script.js
    功能：任务管理 / 交付记录 / 数据持久化 / 状态流转
    ================================================================ */
 
@@ -365,7 +365,7 @@ function renderTasks() {
     const container = $('#tasks-container');
 
     if (visible.length === 0) {
-        container.innerHTML = '<div class="empty-state">没有匹配的任务，换个关键词试试。</div>';
+        container.innerHTML = '<div class="empty-state">暂无匹配任务，尝试其他筛选或发布新任务</div>';
         return;
     }
 
@@ -419,7 +419,7 @@ function renderRecords() {
     const container = $('#records-container');
 
     if (activeRecords.length === 0) {
-        container.innerHTML = '<div class="empty-state">暂无交付记录。</div>';
+        container.innerHTML = '<div class="empty-state">暂无交付记录，交付审核通过后将在这里展示。</div>';
         return;
     }
 
