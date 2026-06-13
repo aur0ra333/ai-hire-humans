@@ -17,9 +17,10 @@
                 <a href="#tasks">任务池</a>
                 <a href="#workflow">流程</a>
                 <a href="#records">交付记录</a>
+                <a href="#completed">已完成项目</a>
                 <a href="#quality">质量标准</a>
             </div>
-            <button class="primary-btn" data-action="publish" type="button">发布任务</button>
+            <button class="primary-btn" id="btn-publish" type="button">发布任务</button>
         </nav>
     </header>
 
@@ -29,8 +30,9 @@
                 <p class="eyebrow">Task Collaboration Lab</p>
                 <h1>任务协作实验室</h1>
                 <p class="hero-lead">
-                    一个面向临时调研、线下验证、内容整理和产品反馈的任务协作原型。
-                    页面重点展示任务筛选、需求说明、交付记录和质量规则。
+                    面向临时调研、线下验证、内容整理和产品反馈的众包任务协作平台。
+                    支持任务发布、认领、交付审核和状态追踪的全流程闭环。
+                    在实际场景中可通过 AI 辅助任务匹配和质量审核。
                 </p>
                 <div class="hero-actions">
                     <a class="primary-btn" href="#tasks">浏览任务</a>
@@ -39,16 +41,20 @@
             </div>
             <aside class="hero-panel">
                 <div class="panel-row">
-                    <span>本周开放任务</span>
-                    <strong id="open-count">0</strong>
+                    <span>开放任务数</span>
+                    <strong id="stat-open-count">0</strong>
                 </div>
                 <div class="panel-row">
-                    <span>已验证交付</span>
-                    <strong id="record-count">0</strong>
+                    <span>今日新增</span>
+                    <strong id="stat-today-count">0</strong>
                 </div>
                 <div class="panel-row">
-                    <span>平均审核时长</span>
-                    <strong>4.6h</strong>
+                    <span>总交付数</span>
+                    <strong id="stat-delivery-count">0</strong>
+                </div>
+                <div class="panel-row">
+                    <span>总赏金</span>
+                    <strong id="stat-bounty-total">¥0</strong>
                 </div>
             </aside>
         </section>
@@ -56,18 +62,18 @@
         <section class="stats-band" aria-label="平台数据">
             <article>
                 <span>任务类型</span>
-                <strong>4</strong>
+                <strong id="band-category-count">0</strong>
                 <p>调研 / 验证 / 内容 / 设计</p>
             </article>
             <article>
                 <span>覆盖城市</span>
-                <strong id="city-count">0</strong>
+                <strong id="band-city-count">0</strong>
                 <p>支持同城线下任务</p>
             </article>
             <article>
-                <span>演示赏金</span>
-                <strong id="bounty-total">¥0</strong>
-                <p>用于展示结算逻辑</p>
+                <span>已完成项目</span>
+                <strong id="band-completed-count">0</strong>
+                <p>已验收归档的任务</p>
             </article>
         </section>
 
@@ -77,8 +83,8 @@
                 <span>产品页面信息架构、任务数据渲染、筛选搜索、详情弹窗和交付记录设计。</span>
             </div>
             <div>
-                <strong>可继续扩展</strong>
-                <span>接入登录、任务发布表单、审核状态接口和后台管理页面。</span>
+                <strong>AI 赋能方向</strong>
+                <span>在实际场景中，可通过 AI 辅助任务与协作者的智能匹配、交付内容质量初审和异常检测，提升审核效率。本原型目前聚焦于交互和流程的完整展示。</span>
             </div>
         </section>
 
@@ -139,6 +145,17 @@
             <div id="records-container" class="records-grid"></div>
         </section>
 
+        <section id="completed" class="section alt-section">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">Completed Projects</p>
+                    <h2>已完成项目</h2>
+                </div>
+                <p>已完成并归档的任务，展示项目闭环成果。</p>
+            </div>
+            <div id="completed-container" class="completed-grid"></div>
+        </section>
+
         <section id="quality" class="section quality-section">
             <div>
                 <p class="eyebrow">Quality Rules</p>
@@ -165,24 +182,162 @@
         </section>
     </main>
 
+    <!-- ===== 任务详情 Modal ===== -->
     <div id="task-modal" class="modal" hidden>
-        <div class="modal-backdrop" data-close="modal"></div>
+        <div class="modal-backdrop" data-close="task-modal"></div>
         <article class="modal-card">
-            <button class="modal-close" data-close="modal" type="button">×</button>
+            <button class="modal-close" data-close="task-modal" type="button">&times;</button>
             <p id="modal-category" class="eyebrow"></p>
             <h2 id="modal-title"></h2>
             <p id="modal-description"></p>
             <div id="modal-meta" class="modal-meta"></div>
             <h3>交付要求</h3>
             <ul id="modal-requirements"></ul>
-            <button class="primary-btn" data-action="apply" type="button">申请认领</button>
+            <div class="modal-actions">
+                <button class="primary-btn" id="modal-apply-btn" type="button">申请认领</button>
+                <button class="secondary-btn" id="modal-deliver-btn" type="button" hidden>提交交付</button>
+                <span id="modal-status-label" class="status-label" hidden></span>
+            </div>
+        </article>
+    </div>
+
+    <!-- ===== 发布任务 Modal ===== -->
+    <div id="publish-modal" class="modal" hidden>
+        <div class="modal-backdrop" data-close="publish-modal"></div>
+        <article class="modal-card modal-form-card">
+            <button class="modal-close" data-close="publish-modal" type="button">&times;</button>
+            <h2>发布新任务</h2>
+            <p class="modal-subtitle">填写以下信息发布众包任务，所有字段请尽量详细填写。</p>
+            <form id="publish-form" novalidate>
+                <div class="form-group">
+                    <label for="pub-title">任务标题 <span class="required">*</span></label>
+                    <input id="pub-title" type="text" placeholder="例如：调研郑州高校周边打印店价格" maxlength="100" required>
+                    <span class="form-error" id="error-title"></span>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="pub-category">分类 <span class="required">*</span></label>
+                        <select id="pub-category" required>
+                            <option value="">请选择分类</option>
+                            <option value="线下调研">线下调研</option>
+                            <option value="内容整理">内容整理</option>
+                            <option value="产品反馈">产品反馈</option>
+                            <option value="数据核验">数据核验</option>
+                            <option value="设计评审">设计评审</option>
+                            <option value="用户访谈">用户访谈</option>
+                        </select>
+                        <span class="form-error" id="error-category"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pub-city">城市 <span class="required">*</span></label>
+                        <select id="pub-city" required>
+                            <option value="">请选择城市</option>
+                            <option value="远程">远程</option>
+                            <option value="北京">北京</option>
+                            <option value="上海">上海</option>
+                            <option value="广州">广州</option>
+                            <option value="深圳">深圳</option>
+                            <option value="杭州">杭州</option>
+                            <option value="成都">成都</option>
+                            <option value="武汉">武汉</option>
+                            <option value="南京">南京</option>
+                            <option value="郑州">郑州</option>
+                            <option value="新乡">新乡</option>
+                        </select>
+                        <span class="form-error" id="error-city"></span>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="pub-bounty">赏金金额 (元) <span class="required">*</span></label>
+                        <input id="pub-bounty" type="number" placeholder="例如：80" min="1" step="1" required>
+                        <span class="form-error" id="error-bounty"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pub-deadline">截止时间 <span class="required">*</span></label>
+                        <select id="pub-deadline" required>
+                            <option value="">请选择截止时间</option>
+                            <option value="24 小时内">24 小时内</option>
+                            <option value="2 天内">2 天内</option>
+                            <option value="3 天内">3 天内</option>
+                            <option value="本周内">本周内</option>
+                            <option value="1 周内">1 周内</option>
+                            <option value="2 周内">2 周内</option>
+                        </select>
+                        <span class="form-error" id="error-deadline"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>技能要求 (可多选)</label>
+                    <div class="tag-select" id="pub-skills">
+                        <button type="button" class="tag-option" data-tag="信息采集">信息采集</button>
+                        <button type="button" class="tag-option" data-tag="表格整理">表格整理</button>
+                        <button type="button" class="tag-option" data-tag="拍照记录">拍照记录</button>
+                        <button type="button" class="tag-option" data-tag="Markdown">Markdown</button>
+                        <button type="button" class="tag-option" data-tag="技术写作">技术写作</button>
+                        <button type="button" class="tag-option" data-tag="移动端测试">移动端测试</button>
+                        <button type="button" class="tag-option" data-tag="截图标注">截图标注</button>
+                        <button type="button" class="tag-option" data-tag="数据整理">数据整理</button>
+                        <button type="button" class="tag-option" data-tag="内容审核">内容审核</button>
+                        <button type="button" class="tag-option" data-tag="现场记录">现场记录</button>
+                        <button type="button" class="tag-option" data-tag="信息归纳">信息归纳</button>
+                        <button type="button" class="tag-option" data-tag="用户体验">用户体验</button>
+                        <button type="button" class="tag-option" data-tag="数据分析">数据分析</button>
+                        <button type="button" class="tag-option" data-tag="可用性测试">可用性测试</button>
+                        <button type="button" class="tag-option" data-tag="问卷设计">问卷设计</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="pub-description">任务描述 <span class="required">*</span></label>
+                    <textarea id="pub-description" rows="4" placeholder="详细描述任务的目标、范围和预期结果，至少 20 个字" required></textarea>
+                    <span class="form-error" id="error-description"></span>
+                    <span class="form-hint" id="hint-description">0/20 字</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="pub-requirements">交付要求 (每行一条)</label>
+                    <textarea id="pub-requirements" rows="3" placeholder="提交价格表 CSV 或 Excel&#10;每家店至少 1 张门头照片&#10;备注营业时间和排队情况"></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button class="secondary-btn" type="button" data-close="publish-modal">取消</button>
+                    <button class="primary-btn" type="submit">发布任务</button>
+                </div>
+            </form>
+        </article>
+    </div>
+
+    <!-- ===== 申请认领确认 Modal ===== -->
+    <div id="apply-modal" class="modal" hidden>
+        <div class="modal-backdrop" data-close="apply-modal"></div>
+        <article class="modal-card modal-confirm-card">
+            <button class="modal-close" data-close="apply-modal" type="button">&times;</button>
+            <h2>确认认领任务</h2>
+            <p class="modal-subtitle">请确认以下任务信息，认领后将进入已分配状态。</p>
+            <div class="confirm-summary">
+                <div class="confirm-row"><span>任务标题</span><strong id="confirm-title"></strong></div>
+                <div class="confirm-row"><span>分类</span><strong id="confirm-category"></strong></div>
+                <div class="confirm-row"><span>城市</span><strong id="confirm-city"></strong></div>
+                <div class="confirm-row"><span>赏金</span><strong id="confirm-bounty"></strong></div>
+                <div class="confirm-row"><span>截止时间</span><strong id="confirm-deadline"></strong></div>
+            </div>
+            <div class="form-actions">
+                <button class="secondary-btn" type="button" data-close="apply-modal">取消</button>
+                <button class="primary-btn" id="apply-confirm-btn" type="button">确认认领</button>
+            </div>
         </article>
     </div>
 
     <div id="toast" class="toast" hidden></div>
 
     <footer class="footer">
-        <p>© 2026 Task Collaboration Lab. Static product prototype.</p>
+        <p>&copy; 2026 Task Collaboration Lab. 众包任务协作平台原型 | AI 可辅助任务匹配与质量审核。</p>
     </footer>
 
     <script src="script.js"></script>

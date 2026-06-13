@@ -716,3 +716,416 @@ body {
     border-color: rgba(37, 99, 235, 0.24);
     box-shadow: var(--shadow-md);
 }
+
+/* ---- 状态标签 ---- */
+.status-badge {
+    display: inline-block;
+    border-radius: 999px;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    line-height: 1.4;
+    white-space: nowrap;
+}
+
+.status-badge.status-open {
+    background: #e6f7ed;
+    color: #0f9f6e;
+    border: 1px solid rgba(15, 159, 110, 0.2);
+}
+
+.status-badge.status-assigned {
+    background: #e9f0ff;
+    color: #2563eb;
+    border: 1px solid rgba(37, 99, 235, 0.2);
+}
+
+.status-badge.status-review {
+    background: #fef3e4;
+    color: #b85c38;
+    border: 1px solid rgba(184, 92, 56, 0.2);
+}
+
+.status-badge.status-done {
+    background: #f3e8ff;
+    color: #7c3aed;
+    border: 1px solid rgba(124, 58, 237, 0.2);
+}
+
+/* 任务详情 Modal 中的状态标签 */
+.status-label {
+    display: inline-block;
+    border-radius: 999px;
+    padding: 8px 18px;
+    font-size: 0.9rem;
+    font-weight: 800;
+}
+
+.status-label.status-review {
+    background: #fef3e4;
+    color: #b85c38;
+}
+
+.status-label.status-done {
+    background: #f3e8ff;
+    color: #7c3aed;
+}
+
+/* ---- 任务卡片状态边框 ---- */
+.task-card[data-status="招募中"] {
+    border-left: 3px solid #0f9f6e;
+}
+.task-card[data-status="已分配"] {
+    border-left: 3px solid #2563eb;
+}
+.task-card[data-status="审核中"] {
+    border-left: 3px solid #b85c38;
+}
+
+/* ---- 表单样式 ---- */
+select,
+textarea {
+    font: inherit;
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: #fff;
+    outline: none;
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+select {
+    min-height: 46px;
+    padding: 0 13px;
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23667085' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+    cursor: pointer;
+}
+
+textarea {
+    padding: 11px 13px;
+    resize: vertical;
+    min-height: 80px;
+}
+
+select:focus,
+textarea:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 800;
+    font-size: 0.92rem;
+    color: var(--ink);
+}
+
+.required {
+    color: #e74c3c;
+    margin-left: 2px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.form-row .form-group {
+    margin-bottom: 0;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.form-error {
+    display: block;
+    margin-top: 4px;
+    font-size: 0.82rem;
+    color: #e74c3c;
+    min-height: 0;
+}
+
+.form-error:empty {
+    display: none;
+}
+
+.form-hint {
+    display: block;
+    margin-top: 4px;
+    font-size: 0.82rem;
+    color: var(--muted);
+}
+
+.has-error input,
+.has-error select,
+.has-error textarea {
+    border-color: #e74c3c;
+    box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+}
+
+.has-error input:focus,
+.has-error select:focus,
+.has-error textarea:focus {
+    border-color: #e74c3c;
+}
+
+/* ---- 技能标签多选 ---- */
+.tag-select {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag-option {
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: #fff;
+    color: var(--muted);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.tag-option:hover {
+    border-color: var(--blue);
+    color: var(--blue);
+}
+
+.tag-option.active {
+    background: var(--blue);
+    color: #fff;
+    border-color: var(--blue);
+}
+
+/* ---- 小按钮 ---- */
+.small-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 32px;
+    padding: 0 12px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: #fff;
+    font-size: 0.82rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.approve-btn {
+    color: #0f9f6e;
+    border-color: rgba(15, 159, 110, 0.3);
+}
+
+.approve-btn:hover {
+    background: #0f9f6e;
+    color: #fff;
+}
+
+.reject-btn {
+    color: #e74c3c;
+    border-color: rgba(231, 76, 60, 0.3);
+}
+
+.reject-btn:hover {
+    background: #e74c3c;
+    color: #fff;
+}
+
+.archive-btn {
+    color: var(--muted);
+}
+
+.archive-btn:hover {
+    background: var(--ink);
+    color: #fff;
+}
+
+/* ---- 交付记录状态标签 ---- */
+.record-state {
+    font-weight: 800;
+    font-size: 0.85rem;
+}
+
+.state-passed { color: #0f9f6e; }
+.state-pending { color: #b85c38; }
+.state-closed { color: var(--muted); }
+
+.record-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+/* ---- Modal 通用 ---- */
+.modal-subtitle {
+    color: var(--muted);
+    margin: 6px 0 22px;
+    font-size: 0.95rem;
+}
+
+.modal-actions {
+    margin-top: 18px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.modal-form-card {
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+/* ---- 确认 Modal ---- */
+.modal-confirm-card {
+    width: min(520px, 100%);
+}
+
+.confirm-summary {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px;
+    margin: 16px 0;
+    background: var(--surface-soft);
+}
+
+.confirm-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.confirm-row:last-child {
+    border-bottom: 0;
+}
+
+.confirm-row span {
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.confirm-row strong {
+    font-size: 0.95rem;
+}
+
+/* ---- 已完成项目区 ---- */
+.completed-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.completed-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition), box-shadow var(--transition);
+    border-left: 3px solid #7c3aed;
+}
+
+.completed-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.completed-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+}
+
+.completed-head > span {
+    border-radius: 999px;
+    padding: 5px 10px;
+    background: var(--surface-soft);
+    color: var(--muted);
+    font-size: 0.82rem;
+    margin-right: auto;
+}
+
+.completed-card h3 {
+    font-size: 1.15rem;
+    line-height: 1.42;
+}
+
+.completed-card p {
+    color: var(--muted);
+}
+
+/* ---- Hero Panel 4行适配 ---- */
+.hero-panel {
+    gap: 14px;
+}
+
+.panel-row {
+    padding-bottom: 14px;
+}
+
+.panel-row:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+}
+
+.panel-row strong {
+    font-size: 1.7rem;
+}
+
+/* ---- 按钮禁用态 ---- */
+.primary-btn[hidden],
+.secondary-btn[hidden] {
+    display: none !important;
+}
+
+/* ---- 响应式补充 ---- */
+@media (max-width: 980px) {
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .form-row .form-group {
+        margin-bottom: 16px;
+    }
+
+    .completed-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 700px) {
+    .completed-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .form-actions button {
+        width: 100%;
+    }
+}
